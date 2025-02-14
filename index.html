@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Proposal</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffebee;
+            overflow: hidden;
+            position: relative;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 60px;
+            background: red;
+            border-radius: 50%;
+            animation: float 5s infinite ease-in-out;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-100px); }
+            100% { transform: translateY(0px); }
+        }
+        .container {
+            position: relative;
+            top: 40%;
+            transform: translateY(-50%);
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 20px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            background: white;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+        .btn:hover { background: lightgray; }
+        .moving { position: absolute; }
+        .hidden { display: none; }
+        .gallery img {
+            width: 100%;
+            max-width: 300px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            color: #d32f2f;
+            animation: float 6s infinite ease-in-out;
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(200px, -150px); }
+            50% { transform: translate(-200px, 100px); }
+            75% { transform: translate(150px, -200px); }
+        }
+        #response {
+            margin-top: 20px;
+        }
+        #response h2 {
+            font-size: 2.5rem;
+            color: #d32f2f;
+        }
+        #response p {
+            font-size: 1.5rem;
+            color: #555;
+        }
+        /* New Button Effect for "Yes" */
+        .btn-big {
+            transform: scale(1.5);
+            transition: transform 0.3s;
+        }
+        /* Popup Styling */
+        .popup {
+            display: none;
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 99, 71, 0.9);
+            padding: 20px;
+            font-size: 1.5rem;
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="question">
+        <h1>Will you be my Valentine? ❤️</h1>
+        <button class="btn moving" id="no">No</button>
+        <button class="btn" id="yes">Yes</button>
+    </div>
+    
+    <div id="response" class="hidden">
+        <h2>I knew you would say yes! 💖</h2>
+        <p>I will love you forever and hope this puts a smile on your face because you are special, my love!</p>
+        <div class="gallery">
+            <img src="https://i.postimg.cc/fbv3c9dW/Whats-App-Image-2025-02-14-at-14-18-09-a33011dd.jpg" alt="Moment 1">
+            <img src="https://i.postimg.cc/pTrwsfg2/Whats-App-Image-2025-02-14-at-14-18-09-7a49d027.jpg" alt="Moment 2">
+        </div>
+    </div>
+
+    <!-- Popup for "I Love You" -->
+    <div id="popup" class="popup">
+        I Love You! ❤️
+    </div>
+
+    <!-- Floating hearts -->
+    <div class="heart">❤️</div>
+    <div class="heart" style="left: 20%; top: 10%; animation-delay: 1s;">❤️</div>
+    <div class="heart" style="left: 80%; top: 20%; animation-delay: 2s;">❤️</div>
+    <div class="heart" style="left: 50%; top: 30%; animation-delay: 3s;">❤️</div>
+
+    <script>
+        // Add event listener to the 'No' button
+        document.getElementById('no').addEventListener('click', function() {
+            // When "No" is clicked, make the "Yes" button bigger
+            document.getElementById('yes').classList.add('btn-big');
+
+            // Show the "I Love You" popup
+            var popup = document.getElementById('popup');
+            popup.style.display = 'block';
+
+            // Hide the popup after 5 seconds
+            setTimeout(function() {
+                popup.style.display = 'none';
+            }, 5000);
+        });
+
+        // Add event listener to the 'Yes' button
+        document.getElementById('yes').addEventListener('click', function() {
+            document.getElementById('question').classList.add('hidden');
+            document.getElementById('response').classList.remove('hidden');
+        });
+
+        // Optional: If you'd like to remove the "big" effect after a few seconds, you can do so
+        document.getElementById('no').addEventListener('click', function() {
+            setTimeout(() => {
+                document.getElementById('yes').classList.remove('btn-big');
+            }, 1000); // After 1 second, return the "Yes" button to its normal size
+        });
+    </script>
+</body>
+</html>
